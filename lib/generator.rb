@@ -1,5 +1,9 @@
-require "generator/version"
-
 module Generator
-  # Your code goes here...
 end
+
+require 'generator/version'
+require 'generator/scrapers'
+require 'generator/models'
+require 'generator/presenters'
+require 'generator/collect_events'
+require 'generator/render'
