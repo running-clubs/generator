@@ -27,5 +27,9 @@ module Generator::Presenters
     def location
       event.group.location
     end
+
+    def image_url
+      nil
+    end
   end
 end
