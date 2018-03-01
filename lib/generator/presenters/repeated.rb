@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Generator::Presenters
   RepeatedEventPresenter = Struct.new(:event) do
     def timestamp

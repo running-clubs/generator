@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Generator::Presenters
   FacebookEventPresenter = Struct.new(:event) do
     def timestamp

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Generator::Scrapers
   Repeated = Struct.new(:repeated_events) do
     attr_reader :events

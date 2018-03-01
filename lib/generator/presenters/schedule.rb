@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Generator::Presenters
   EventsPresenter = Struct.new(:events) do
     def events
