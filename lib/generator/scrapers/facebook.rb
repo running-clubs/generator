@@ -8,6 +8,7 @@ module Generator::Scrapers
     attr_reader :events
 
     def run!(start_time)
+      logger = Logger.new(STDOUT)
       @events = []
       groups.each do |group|
         # grab acccess token from https://developers.facebook.com/tools/accesstoken/
@@ -21,7 +22,10 @@ module Generator::Scrapers
                      }
                    )
 
-        next if response.code != 200
+        if response.code != 200
+          logger.error "Facebook #{group.name} failed with #{response.code}"
+          next
+        end
 
         @events += JSON.parse(response.body)['data'].select do |event|
           event['type'] == 'public'

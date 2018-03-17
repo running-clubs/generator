@@ -8,6 +8,7 @@ module Generator
   ) do
     def events
       @events ||= begin
+                    logger = Logger.new(STDOUT)
                     scraped_events = []
                     scraped_events += Scrapers::Repeated
                                       .new(repeating_groups)
@@ -18,11 +19,15 @@ module Generator
                                       .run!(start_time)
                                       .events
 
-                    current_time = Time.now
+                    logger.info "Filtering events based:"
+                    logger.info "\tstart_time: #{start_time}"
+                    logger.info "\tend_time: #{end_time}"
+
                     scraped_events
+                      .sort_by(&:timestamp)
+                      .each { |event| logger.info "event: #{event.title} @ #{event.timestamp}" }
                       .reject { |event| event.timestamp < start_time }
                       .reject { |event| event.timestamp > end_time }
-                      .sort_by(&:timestamp)
                       .uniq
                   end
     end
